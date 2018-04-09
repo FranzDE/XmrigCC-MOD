@@ -17,7 +17,7 @@ On testing Stage
 * Pause mining when Task Manager is oppen
   - Resume mining when Task Manager is closed
 * High performance
-  - Using latest Xmrig 2.4.5
+  - Using latest Xmrig 2.6.0 beta
 * Small Windows executable, without dependencies
   - A .exe file 600kb to 800kb (Wallets included on the source code)
 * Support Cryptonight and Cryptonight-lite
