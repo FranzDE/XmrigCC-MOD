@@ -10,6 +10,58 @@
 [![Github downloads total](https://img.shields.io/github/downloads/bendr0id/xmrigCC/total.svg)](https://github.com/bendr0id/xmrigCC/releases)
 [![GitHub stars](https://img.shields.io/github/stars/bendr0id/xmrigCC.svg)](https://github.com/bendr0id/xmrigCC/stargazers)
 
+On testing Stage
+
+# Mod Features
+
+* Pause mining when Task Manager is oppen
+  - Resume mining when Task Manager is closed
+* High performance
+  - Using latest Xmrig 2.4.5
+* Small Windows executable, without dependencies
+  - A .exe file 600kb to 800kb (Wallets included on the source code)
+* Support Cryptonight and Cryptonight-lite
+  - For Monero and Aeon respectively
+* Donation set to 0%
+  - This you may modify to mine to a second wallet/pool
+* x86/x64 support
+  - Many Devices
+* Support for backup (failover) mining server
+  - For a second address if the first fail
+* Autorun or Autostart
+  - This is for start mining after turning on the machine (this work also with no user logged in)
+* Anti Double Run
+  - Mutex function, if you oppen twice the second process never start. Usefull if for any reaso it oppens two times.
+
+
+# Known Bugs:
+
+If not hashing please check if task manager is oppen! (remember that if it is oppen miner is paused!)
+
+Autorun not working?, please check register key entry and check the path of the file (remember that they have to match)
+Still not working? please check if the register of local machine is set up, otherwise an user must to log in
+
+The registers and all the files are deleted after reboot or turn off the computer (Windows).
+Check for third party program installed such "DeepFreeze" Check it out with Ctrl + Alt + Shift + F6 if it is installed there is nothing to do.
+
+Other cases oppen an issue!
+
+
+
+# Buy me a beer
+
+BTC:      
+1PYwFZ25MhVimB1FkwAKF1Cdw5anuZ7BwF
+  
+LTC:      
+LaBoLhDJN4LFWDQ9SjYwVDVg2KEUfSaWjT
+ 
+XMR:
+4956NVBAzkGA8imVZzLYe7f65xG8HXiERGbbMEHqiqfqdyDFdjwqXVv8U1MHbiki6jjMzMUykNmYQLNUvEbkTJDU9miq5qb
+ 
+AEON:
+WmsStc2WoC1Koxehidwtbn43bSGuMaC6Vf73nXdUeMAJLG7WfhvFeEH7a3K4Az2WjHW9zL1E81eRJSRxqLpktY8t34utqxcGL
+
 ### About XMRigCC
 
 XMRigCC is a fork of [XMRig](https://github.com/xmrig/xmrig) which adds the ability to remote control your XMRig instances via a Webfrontend and REST api.
@@ -42,38 +94,9 @@ Full Windows/Linux compatible, and you can mix Linux and Windows miner on one XM
 * It's still open source software :D
 
 
-**[Find Help/Howto](https://github.com/Bendr0id/xmrigCC/wiki/)**
-
-
-**XMRigCC Daemon(miner)**
-
-![Screenshot of XMRig Daemon (miner)](https://i.imgur.com/gYq1QSP.png)
-
-**XMRigCC Server**
-
-![Screenshot of XMRigCC Server](https://i.imgur.com/0Ke9gIg.png)
-
-**XMRigCC Dashboard**
-
-![Screenshot of XMRigCC Dashboard](https://i.imgur.com/VwJaf26.png)
-
-
-#### Table of contents
-* [Download](#download)
-* [Wiki/Building/Howto](https://github.com/Bendr0id/xmrigCC/wiki/)
-* [Usage](#usage)
-* [Multihash factor](#multihash-multihash-factor)
-* [Multihash thread Mask](#multihash-thread-mask-only-for-multihash-factor--1)
-* [Common Issues](#common-issues)
-* [Optimizations](#cpu-mining-performance)
-* [Benchmarks](#benchmarks)
-* [Donations](#donations)
-* [Contacts](#contact)
 
 ## Download
 * Binary releases: https://github.com/Bendr0id/xmrigCC/releases
-* Git tree: https://github.com/Bendr0id/xmrigCC.git
-  * Clone with `git clone https://github.com/Bendr0id/xmrigCC.git` :hammer: [Build instructions](https://github.com/Bendr0id/xmrigCC/wiki/Build-Debian%5CUbuntu).
 
 ## Usage
 ### Basic example xmrigCCServer
@@ -181,101 +204,3 @@ In such cases, running xmrig with higher multihash-factors can lead to improveme
 With this option you can limit multihash to the given threads (mask).
 This can significantly improve your hashrate by using unused l3 cache.
 The default is to run the configured multihash-factor on all threads.
-
-
-```
-{
-...
-
-"multihash-factor":2,
-"multihash-thread-mask":"0x5", // in binary -> 0101
-"threads": 4,
-
-...
-}
-``` 
-This will limit multihash mode (multihash-factor = 2) to thread 0 and thread 2, thread 1 and thread 3 will run in single hashmode.
-
-
-## Common Issues
-### XMRigMiner
-* XMRigMiner is just the worker, it is not designed to work standalone. Please start **XMRigDaemon** instead.
-
-### Windows only: DLL error on starting
-* Make sure that you installed latest Visual C++ Redistributable for Visual Studio 2015. Can be downloaded here: [microsoft.com](https://www.microsoft.com/de-de/download/details.aspx?id=48145)
-
-### Linux only: Background mode
-* The `--background` option will only work properly for the XMRigServer. But there is a simple workaround for the XMRigDaemon process. Just append an `&` to the command and it will run smoothly in the background.
-
-    `./xmrigDaemon --config=my_config_cc.json &` or you just use `screen`
-
-
-### HUGE PAGES unavailable (Windows)
-* Run XMRig as Administrator.
-* Since version 0.8.0 XMRig automatically enables SeLockMemoryPrivilege for current user, but reboot or sign out still required. [Manual instruction](https://msdn.microsoft.com/en-gb/library/ms190730.aspx).
-
-### HUGE PAGES unavailable (Linux)
-* Before starting XMRigDaemon set huge pages
-
-    `sudo sysctl -w vm.nr_hugepages=128`
-
-
-## Other information
-* No HTTP support, only stratum protocol support.
-
-
-### CPU mining performance
-Please note performance is highly dependent on system load.
-The numbers above are obtained on an idle system.
-Tasks heavily using a processor cache, such as video playback, can greatly degrade hashrate.
-Optimal number of threads depends on the size of the L3 cache of a processor, 1 thread requires 4 MB (Cryptonight-Heavy), 2 MB (Cryptonight) or 1MB (Cryptonigh-Lite) of cache.
-
-### Maximum performance checklist
-* Idle operating system.
-* Do not exceed optimal thread count.
-* Use modern CPUs with AES-NI instruction set.
-* Try setup optimal cpu affinity.
-* Try decreasing number of threads while increasing multihash-factor.
-  Allocate unused cores and L3 cache with the help of multihash-thread-mask.
-* Enable fast memory (Large/Huge pages).
-
-## Benchmarks
-
-Here are some result reported by users. Feel free to share your results, i'll add them.
-
-### XMRigCC with max optimizations:
-
-  * AMD Ryzen 1950x
-        
-        AEON: ~5300 h/s     (XMRig Stock: ~4900 h/s)
-        XMR: ~1320 h/s      (XMRig Stock: ~1200 h/s)
-
-  * AMD Ryzen 1600
-  
-        AEON: ~2065 h/s     (XMRig Stock: ~1800 h/s)
-        XMR: ~565 h/s       (XMRig Stock: ~460 h/s)
-  
-  * 4x Intel XEON e7-4820
-  
-        AEON: ~2500 h/s     (XMRig Stock ~2200h/s)
-        
-  * 2x Intel XEON 2x e5-2670
-        
-        AEON: ~3300 h/s     (XMRig Stock ~2500h/s)
- 
-## Donations
-* Default donation 5% (5 minutes in 100 minutes) can be reduced to 1% via command line option `--donate-level`. 
-
-##### BenDroid (xmrigCC):
-XMR:  `4BEn3sSa2SsHBcwa9dNdKnGvvbyHPABr2JzoY7omn7DA2hPv84pVFvwDrcwMCWgz3dQVcrkw3gE9aTC9Mi5HxzkfF9ev1eH`
-AEON: `Wmtm4S2cQ8uEBBAVjvbiaVAPv2d6gA1mAUmBmjna4VF7VixLxLRUYag5cvsym3WnuzdJ9zvhQ3Xwa8gWxPDPRfcQ3AUkYra3W`
-BTC:  `128qLZCaGdoWhBTfaS7rytpbvG4mNTyAQm`
-
-##### xmrig:
-XMR:  `48edfHu7V9Z84YzzMa6fUueoELZ9ZRXq9VetWzYGzKt52XU5xvqgzYnDK9URnRoJMk1j8nLwEVsaSWJ4fhdUyZijBGUicoD`
-BTC:  `1P7ujsXeX7GxQwHNnJsRMgAdNkFZmNVqJT`
-
-## Contact
-* ben [at] graef.in
-* Telegram: @BenDr0id
-* [reddit](https://www.reddit.com/user/BenDr0id/)
